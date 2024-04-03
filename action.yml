@@ -29,6 +29,8 @@ inputs:
   push_lfs_all:
     description: Push all LFS files before the force push (optional)
     required: false
+    type: boolean
+    default: false
 
 runs:
   using: 'docker'
