@@ -6,6 +6,7 @@ SOURCE_REPO=$1
 SOURCE_BRANCH=$2
 DESTINATION_REPO=$3
 DESTINATION_BRANCH=$4
+PUSH_LFS_ALL=$5
 
 if ! echo $SOURCE_REPO | grep -Eq ':|@|\.git\/?$'; then
   if [[ -n "$SSH_PRIVATE_KEY" || -n "$SOURCE_SSH_PRIVATE_KEY" ]]; then
@@ -46,6 +47,11 @@ git --no-pager branch -a -vv
 if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   # Push using destination ssh key if provided
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
+fi
+
+if [[ -n "$PUSH_LFS_ALL" ]]; then
+  # Push all LFS files
+  git lfs push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}"
 fi
 
 git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
