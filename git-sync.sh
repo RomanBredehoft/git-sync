@@ -49,9 +49,7 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-if [[ -n "$PUSH_LFS_ALL" ]]; then
-  apt-get install git-lfs
-  
+if [[ -n "$PUSH_LFS_ALL" ]]; then 
   # Push all LFS files
   git lfs push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}"
 fi
