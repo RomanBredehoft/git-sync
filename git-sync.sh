@@ -50,8 +50,12 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
 fi
 
 if [[ -n "$PUSH_LFS" ]]; then 
+  echo "Pushing LFS files:"
+
   # Push LFS files
   git lfs push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}"
 fi
+
+echo "Pushing remaining files:"
 
 git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
