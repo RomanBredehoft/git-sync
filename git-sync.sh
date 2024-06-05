@@ -53,9 +53,10 @@ if [[ -n "$PUSH_LFS" ]]; then
   echo "Pushing LFS files:"
 
   # Push LFS files
-  git lfs push destination "${DESTINATION_BRANCH}" --dry-run
+  # LFS push only needs to consider a the target's branch name
+  git lfs push destination "${DESTINATION_BRANCH}"
 fi
 
 echo "Pushing remaining files:"
 
-git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f --dry-run
+git push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}" -f
