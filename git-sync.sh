@@ -49,12 +49,12 @@ if [[ -n "$DESTINATION_SSH_PRIVATE_KEY" ]]; then
   git config --local core.sshCommand "/usr/bin/ssh -i ~/.ssh/dst_rsa"
 fi
 
-# if [[ -n "$PUSH_LFS" ]]; then 
-#   echo "Pushing LFS files:"
+if [[ -n "$PUSH_LFS" ]]; then 
+  echo "Pushing LFS files:"
 
-#   # Push LFS files
-#   git lfs push destination "${SOURCE_BRANCH}:${DESTINATION_BRANCH}"
-# fi
+  # Push LFS files
+  git lfs push destination "${DESTINATION_BRANCH}" --dry-run
+fi
 
 echo "Pushing remaining files:"
 
